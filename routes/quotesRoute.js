@@ -24,7 +24,7 @@ let sendDailyQuotesTOUser = async () => {
     });
     let getSendEmail = await SendEmail.findOne({});
     let send = getSendEmail.send;
-    if (new Date().getHours() == 22 && send == true) {
+    if (new Date().getHours() == 6 && send == true) {
       console.log(
         "sending email to all emails" +
           new Date().toLocaleDateString() +
@@ -42,9 +42,10 @@ let sendDailyQuotesTOUser = async () => {
         { $set: { send: false } }
       );
     } else {
-      console.log("not sending mail", new Date().getHours());
+      console.log("not sending mail");
+      console.log(new Date().getHours());
     }
-    if (new Date().getHours() > 22) {
+    if (new Date().getHours() > 6) {
       if (send == false) {
         console.log(send);
         let updateSendEmail = await SendEmail.updateOne(
