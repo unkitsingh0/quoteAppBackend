@@ -24,7 +24,7 @@ let sendDailyQuotesTOUser = async () => {
     });
     let getSendEmail = await SendEmail.findOne({});
     let send = getSendEmail.send;
-    if (new Date().getHours() == 6 && send == true) {
+    if (new Date().getHours() == 3 && send == true) {
       console.log(
         "sending email to all emails" +
           new Date().toLocaleDateString() +
@@ -45,7 +45,7 @@ let sendDailyQuotesTOUser = async () => {
       console.log("not sending mail");
       console.log(new Date().getHours());
     }
-    if (new Date().getHours() > 6) {
+    if (new Date().getHours() > 3) {
       if (send == false) {
         console.log(send);
         let updateSendEmail = await SendEmail.updateOne(
@@ -55,7 +55,7 @@ let sendDailyQuotesTOUser = async () => {
         console.log("updating sendEmail");
       }
     }
-  }, 10000);
+  }, 2940000); // 49Min
 };
 //3600000 This is milisecond
 //This milisecond is equal to 60 min
