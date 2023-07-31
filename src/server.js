@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 //Connecting to database
-connecToDatabase(process.env.Database_uri);
+connecToDatabase(process.env.Database_uri_atlas);
 
 //Routes
 app.use("/api/quotes", quotesRouter);
