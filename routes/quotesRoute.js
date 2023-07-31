@@ -42,7 +42,7 @@ let sendDailyQuotesTOUser = async () => {
         { $set: { send: false } }
       );
     } else {
-      console.log("not sending mail");
+      console.log("not sending mail", new Date().getHours());
     }
     if (new Date().getHours() > 22) {
       if (send == false) {
