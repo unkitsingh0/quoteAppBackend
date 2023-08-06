@@ -15,6 +15,7 @@ router.get("/today", async (req, res) => {
   res.send(data);
 });
 
+//This will send email everday in morning
 let sendDailyQuotesTOUser = async () => {
   setInterval(async () => {
     let getAllEmail = await Email.find({});
@@ -24,6 +25,7 @@ let sendDailyQuotesTOUser = async () => {
     });
     let getSendEmail = await SendEmail.findOne({});
     let send = getSendEmail.send;
+    console.log(send);
     if (new Date().getHours() == 3 && send == true) {
       console.log(
         "sending email to all emails" +
@@ -36,7 +38,10 @@ let sendDailyQuotesTOUser = async () => {
       ${quote.data[0].q}\n
       ${quote.data[0].a}
       `;
-      mailServer(emails, "Quote of the day", QuoteMessage);
+      emails.map((email) => {
+        // console.log(email);
+        mailServer(email, "Quote of the day", QuoteMessage);
+      });
       let updateSendEmail = await SendEmail.updateOne(
         { _id: "64c4df7ec687b4b12d4d9f2b" },
         { $set: { send: false } }
@@ -57,6 +62,7 @@ let sendDailyQuotesTOUser = async () => {
     }
   }, 2940000); // 49Min
 };
+//2940000 49Min
 //3600000 This is milisecond
 //This milisecond is equal to 60 min
 sendDailyQuotesTOUser();
